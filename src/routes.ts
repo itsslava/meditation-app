@@ -1,13 +1,23 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 export const router = createRouter({
+  history: createWebHistory(),
   routes: [
-    { path: '/', component: () => import('./views/main-view.vue') },
     {
-      path: '/statistic',
-      component: () => import('./views/statistic-view.vue'),
-      name: 'statistic',
+      path: '/main',
+      component: () => import('@/layouts/main-layout.vue'),
+      children: [
+        {
+          path: '',
+          name: 'main',
+          component: () => import('@/views/main-view.vue'),
+        },
+        {
+          path: 'statistic',
+          name: 'statistic',
+          component: () => import('@/views/statistic-view.vue'),
+        },
+      ],
     },
   ],
-  history: createWebHistory(),
 });
