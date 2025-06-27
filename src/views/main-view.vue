@@ -4,7 +4,6 @@ import MeditationList from '@/components/meditation-list.vue';
 
 <template>
   <main class="main">
-    <div class="header">Header</div>
     <div class="content">
       <div class="left-panel">Left Panel</div>
       <div class="right-panel"><MeditationList /></div>
@@ -16,9 +15,7 @@ import MeditationList from '@/components/meditation-list.vue';
 .main {
   padding: 40px 60px;
 }
-.header {
-  margin-bottom: 66px;
-}
+
 .content {
   display: flex;
   gap: 100px;
