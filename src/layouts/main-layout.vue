@@ -1,13 +1,17 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import HeaderMain from '@/components/header-main.vue';
+</script>
 <template>
-  <header>
-    <div class="header">Header</div>
-  </header>
-  <RouterView />
+  <div class="layout">
+    <header>
+      <HeaderMain />
+    </header>
+    <main><RouterView /></main>
+  </div>
 </template>
 
 <style scoped>
-.header {
-  margin-bottom: 66px;
+.layout {
+  padding: 40px 60px;
 }
 </style>

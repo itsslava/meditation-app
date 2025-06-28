@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
-import PlayIcon from '@/assets/icons/play-icon.vue';
+import PlayIcon from '@/icons/play-icon.vue';
 
 const { title, description, duration } = defineProps<{
   title: string;
@@ -15,9 +15,9 @@ const { title, description, duration } = defineProps<{
     <p class="card__desc">{{ description }}</p>
     <div class="card__footer">
       <button type="button" class="card__btn" aria-label="Начать {{ title }}">
-        Start <PlayIcon />
+        Начать <PlayIcon />
       </button>
-      <div class="card__duration">{{ duration }} min</div>
+      <div class="card__duration">{{ duration }} мин</div>
     </div>
   </div>
 </template>
