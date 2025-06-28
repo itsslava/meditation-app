@@ -16,7 +16,7 @@ const menuItems = [
 
 <template>
   <div class="profile-panel">
-    <img class="profile-img" src="../assets/profile-img.png" alt="User Avatar" />
+    <img class="profile-img" src="../assets/profile-avatar.png" alt="User Avatar" />
     <h1 class="profile-title">Добро пожаловать, Наталья!</h1>
     <div class="profile-desc">Как вы сегодня себя чувствуете?</div>
     <ul class="profile-list">
