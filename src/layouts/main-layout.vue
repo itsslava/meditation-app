@@ -2,7 +2,7 @@
 import HeaderMain from '@/components/header-main.vue';
 </script>
 <template>
-  <div class="layout">
+  <div class="main-layout">
     <header>
       <HeaderMain />
     </header>
@@ -11,7 +11,7 @@ import HeaderMain from '@/components/header-main.vue';
 </template>
 
 <style scoped>
-.layout {
+.main-layout {
   padding: 40px 60px;
 }
 </style>

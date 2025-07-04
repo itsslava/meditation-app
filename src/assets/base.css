@@ -6,6 +6,9 @@
   --color-card-bg: #f7f3f0;
   --color-card-bg-hover: #ffffff;
   --color-inactive: rgba(255, 255, 255, 0.5);
+  --color-text-btn: #7c9a92;
+  --color-text-btn-hover: #9bb8b0;
+  --color-placeholder: #bec2c2;
 }
 
 *,
