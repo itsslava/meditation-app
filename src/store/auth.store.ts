@@ -1,4 +1,4 @@
-import { API_ROUTES, http } from '@/api';
+import { API_ROUTES, client } from '@/api';
 import type { LoginResponse, RegisterResponse } from '@/interfaces/auth.interface';
 import type { User } from '@/interfaces/profile.interface';
 import { defineStore } from 'pinia';
@@ -29,7 +29,7 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function login(username: string, password: string) {
-    const { data } = await http.post<LoginResponse>(API_ROUTES.auth.login, {
+    const { data } = await client().post<LoginResponse>(API_ROUTES.auth.login, {
       username,
       password,
     });
@@ -39,7 +39,7 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function register(email: string, username: string, password: string) {
-    const { data } = await http.post<RegisterResponse>(API_ROUTES.auth.register, {
+    const { data } = await client().post<RegisterResponse>(API_ROUTES.auth.register, {
       username,
       email,
       password,
