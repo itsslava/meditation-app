@@ -5,6 +5,8 @@ import CalmIcon from '@/icons/profile-icons/calm-icon.vue';
 import RelaxIcon from '@/icons/profile-icons/relax-icon.vue';
 import FocusIcon from '@/icons/profile-icons/focus-icon.vue';
 import AnxiousIcon from '@/icons/profile-icons/anxious-icon.vue';
+import { onMounted } from 'vue';
+import { useProfileStore } from '@/store/profile.store';
 
 const menuItems = [
   { icon: CalmIcon, title: 'Спокойно' },
@@ -12,12 +14,17 @@ const menuItems = [
   { icon: FocusIcon, title: 'Фокусировано' },
   { icon: AnxiousIcon, title: 'Тревожно' },
 ];
+
+const profileStore = useProfileStore();
+onMounted(() => {
+  console.log(profileStore.fetchProfile());
+});
 </script>
 
 <template>
   <div class="profile-panel">
     <img class="profile-img" src="../assets/profile-avatar.png" alt="User Avatar" />
-    <h1 class="profile-title">Добро пожаловать, Наталья!</h1>
+    <h1 class="profile-title">Добро пожаловать, {{ profileStore.profile?.username }}!</h1>
     <div class="profile-desc">Как вы сегодня себя чувствуете?</div>
     <ul class="profile-list">
       <li class="profile-list-item" v-for="item in menuItems" :key="item.title">

@@ -5,6 +5,8 @@ import { useAuthStore } from '@/store/auth.store';
 import { isAxiosError } from 'axios';
 import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import StringInput from '@/components/string-input.vue';
+import TextButton from '@/components/text-button.vue';
 
 interface RegisterForm {
   email: string;
@@ -48,7 +50,7 @@ async function handleSubmit() {
       form.value.password,
     )) as RegisterResponse;
 
-    router.push('/auth/login');
+    router.push({ name: 'main' });
   } catch (err: unknown) {
     if (isAxiosError(err)) {
       console.error('Server responded:', err.response?.data);
@@ -76,9 +78,10 @@ async function handleSubmit() {
 
     <div v-if="errorMessage" class="error">{{ errorMessage }}</div>
 
-    <TextButton type="submit" :disabled="!isFormValid || loading">
+    <TextButton type="submit">
       {{ loading ? 'Регистрация…' : 'Создать аккаунт' }}
     </TextButton>
+    <RouterLink class="auth-link" :to="{ name: 'login' }"> Уже есть аккаунт? Войти </RouterLink>
   </form>
 </template>
 
@@ -95,5 +98,17 @@ async function handleSubmit() {
   color: var(--color-error);
   font-size: 14px;
   text-align: center;
+}
+
+.auth-link {
+  font-family: 'Alegreya Sans', sans-serif;
+  text-align: center;
+  font-size: 16px;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
 }
 </style>

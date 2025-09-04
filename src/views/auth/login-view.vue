@@ -63,6 +63,9 @@ async function handleSubmit() {
     <TextButton type="submit" :disabled="!isFormValid || loading">
       {{ loading ? 'Вход…' : 'Войти в приложение' }}
     </TextButton>
+    <RouterLink class="auth-link" :to="{ name: 'register' }">
+      Нет аккаунта? Зарегистрироваться
+    </RouterLink>
   </form>
 </template>
 
@@ -79,5 +82,17 @@ async function handleSubmit() {
   color: var(--color-error);
   font-size: 14px;
   text-align: center;
+}
+
+.auth-link {
+  font-family: 'Alegreya Sans', sans-serif;
+  text-align: center;
+  font-size: 16px;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
 }
 </style>
