@@ -1,13 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { useAuthStore } from './store/auth.store';
 
 export const router = createRouter({
   history: createWebHistory(),
   routes: [
-    {
-      path: '/',
-      redirect: '/main',
-    },
-
+    { path: '/', redirect: '/main' },
     {
       path: '/auth',
       component: () => import('@/layouts/auth-layout.vue'),
@@ -17,11 +14,7 @@ export const router = createRouter({
           name: 'welcome',
           component: () => import('@/views/auth/welcome-view.vue'),
         },
-        {
-          path: 'login',
-          name: 'login',
-          component: () => import('@/views/auth/login-view.vue'),
-        },
+        { path: 'login', name: 'login', component: () => import('@/views/auth/login-view.vue') },
         {
           path: 'register',
           name: 'register',
@@ -33,11 +26,7 @@ export const router = createRouter({
       path: '/main',
       component: () => import('@/layouts/main-layout.vue'),
       children: [
-        {
-          path: '',
-          name: 'main',
-          component: () => import('@/views/main-view.vue'),
-        },
+        { path: '', name: 'main', component: () => import('@/views/main-view.vue') },
         {
           path: 'statistic',
           name: 'statistic',
@@ -45,5 +34,25 @@ export const router = createRouter({
         },
       ],
     },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: () => import('./views/not-found-view.vue'),
+    },
   ],
+});
+
+const publicPages = ['welcome', 'login', 'register'];
+
+router.beforeEach((to) => {
+  const authStore = useAuthStore();
+  const token = authStore.getToken;
+
+  if (!token && !publicPages.includes(to.name as string)) {
+    return { name: 'login' };
+  }
+
+  if (token && publicPages.includes(to.name as string)) {
+    return { name: 'main' };
+  }
 });

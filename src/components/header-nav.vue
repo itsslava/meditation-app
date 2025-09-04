@@ -1,21 +1,43 @@
 <script lang="ts" setup>
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 
 import MeditationIcon from '@/icons/nav-icons/meditation-icon.vue';
 import StatisticIcon from '@/icons/nav-icons/statistic-icon.vue';
 import LogoutIcon from '@/icons/nav-icons/logout-icon.vue';
+import { useAuthStore } from '@/store/auth.store.ts';
+import type { Component } from 'vue';
 
-const menuItems = [
+const authStore = useAuthStore();
+const router = useRouter();
+
+interface MenuItem {
+  to?: string;
+  icon: Component;
+  label: string;
+  action?: () => void;
+}
+
+const menuItems: MenuItem[] = [
   { to: '/main', icon: MeditationIcon, label: 'Медитация' },
   { to: '/main/statistic', icon: StatisticIcon, label: 'Статистика' },
-  { to: '/', icon: LogoutIcon, label: 'Выход' },
+  { icon: LogoutIcon, label: 'Выход', action: logout },
 ];
+
+function logout() {
+  authStore.clearToken();
+  router.push('/auth/login');
+}
 </script>
 <template>
   <nav class="header-nav">
     <ul class="nav-list">
-      <li v-for="item in menuItems" :key="item.to" class="nav-item">
-        <RouterLink class="nav-link" :to="item.to" exact-active-class="active-link">
+      <li v-for="item in menuItems" :key="item.label" class="nav-item">
+        <button v-if="item.action" class="nav-link" @click="item.action" type="button">
+          <component :is="item.icon" />
+          <span class="nav-link-text">{{ item.label }}</span>
+        </button>
+
+        <RouterLink v-else :to="item.to!" class="nav-link" exact-active-class="active-link">
           <component :is="item.icon" />
           <span class="nav-link-text">{{ item.label }}</span>
         </RouterLink>
@@ -24,6 +46,11 @@ const menuItems = [
   </nav>
 </template>
 <style scoped>
+button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
 .nav-list {
   display: flex;
   list-style: none;
